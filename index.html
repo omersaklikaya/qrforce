@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Forge</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="version-tag">v1.0</div>
+        <h1>
+            <span class="word-qr">QR</span>
+            <span class="word-forge">FORGE</span>
+        </h1>
+        <p class="sub">// encode anything. download instantly.</p>
+    </header>
+
+    <main>
+        <!-- Input Panel -->
+        <div class="panel">
+            <div class="panel-label">01 — input</div>
+
+            <div class="input-group">
+                <label>Content / URL / Text</label>
+                <textarea id="qr-input" placeholder="Enter your link here..."></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Error Correction</label>
+                <div class="ec-pills">
+                    <button class="ec-pill" data-level="L">L · 7%</button>
+                    <button class="ec-pill active" data-level="M">M · 15%</button>
+                    <button class="ec-pill" data-level="Q">Q · 25%</button>
+                    <button class="ec-pill" data-level="H">H · 30%</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Size</label>
+                <div class="slider-wrap">
+                    <input type="range" id="qr-size" min="128" max="512" value="240" step="8">
+                    <span class="range-val" id="size-val">240px</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Colors</label>
+                <div class="color-row">
+                    <div class="color-input-wrap">
+                        <div class="color-swatch">
+                            <div class="swatch-dot" id="fg-dot" style="background:#000000"></div>
+                            <span class="swatch-label">DARK</span>
+                        </div>
+                        <input type="color" id="fg-color" value="#000000">
+                    </div>
+                    <div class="color-input-wrap">
+                        <div class="color-swatch">
+                            <div class="swatch-dot" id="bg-dot" style="background:#ffffff"></div>
+                            <span class="swatch-label">LIGHT</span>
+                        </div>
+                        <input type="color" id="bg-color" value="#ffffff">
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-generate" id="gen-btn">
+                <span class="btn-text">GENERATE</span>
+                <div class="spinner"></div>
+            </button>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="panel output-panel">
+            <div class="panel-label" style="width:100%">02 — output</div>
+
+            <div class="qr-wrap">
+                <div class="qr-frame">
+                    <div class="corner-bl"></div>
+                    <div class="corner-br"></div>
+                    <div id="qr-output">
+                        <div class="qr-placeholder">
+                            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.2">
+                                <rect x="3" y="3" width="7" height="7" rx="1" />
+                                <rect x="14" y="3" width="7" height="7" rx="1" />
+                                <rect x="3" y="14" width="7" height="7" rx="1" />
+                                <rect x="14" y="14" width="4" height="4" rx="0.5" />
+                                <rect x="5" y="5" width="3" height="3" />
+                                <rect x="16" y="5" width="3" height="3" />
+                                <rect x="5" y="16" width="3" height="3" />
+                            </svg>
+                            <p>ENTER CONTENT<br>AND GENERATE</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-row">
+                <button class="btn-dl" id="dl-png">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    PNG
+                </button>
+                <button class="btn-dl" id="dl-svg">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    SVG
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-val" id="char-count">0</div>
+            <div class="stat-key">Chars</div>
+        </div>
+        <div class="stat">
+            <div class="stat-val" id="version-val">—</div>
+            <div class="stat-key">Version</div>
+        </div>
+        <div class="stat">
+            <div class="stat-val" id="capacity-val">—</div>
+            <div class="stat-key">Capacity</div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
