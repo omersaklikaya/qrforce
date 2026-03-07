@@ -244,9 +244,7 @@ input[type="range"] {
   border-radius: 2px;
   outline: none;
   cursor: pointer;
-  /* Larger touch area */
-  padding: 10px 0;
-  background-clip: content-box;
+  padding: 0;
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
